@@ -15,12 +15,6 @@ class PlotViewSet(viewsets.ModelViewSet):
     search_fields = ['plot_number']
     ordering_fields = ['id', 'plot_number']
     
-    def get_queryset(self):
-        """
-        This function returns a list of all the plots for the currently authenticated user
-        """   
-        return Plot.objects.filter(plot_owner = self.request.user)
-    
     def perform_create(self, serializer):
         serializer.save(plot_owner=self.request.user)
     
@@ -45,14 +39,9 @@ class HouseViewSet(viewsets.ModelViewSet):
     search_fields = ['house_number']
     ordering_fields = ['id', 'house_number']
 
-    # def get_queryset(self):
-    #     """
-    #     This functions returns a list of all the houses for the current authenticated user         
-    #     """
-    #     return House.objects.filter()
+    def retrieve(self, request, pk=id, *args, **kwargs):
+        return super(HouseViewSet, self).retrieve(request, pk, *args, **kwargs)
 
-
-
-
-        # return super().get_queryset()
-    
+class TenantViewSet(viewsets.ModelViewSet):
+    queryset = Tenant.objects.all()
+    serializer_class = TenantSerializer

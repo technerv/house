@@ -145,8 +145,8 @@ class User(AbstractBaseUser, PermissionsMixin,):
 
         :return: string
         """
-        return self.email
-
+        return "{0} {1}".format(self.first_name, self.last_name)
+    
     def get_full_name(self):
         """
         Return the first_name plus the last_name, with a space in between.

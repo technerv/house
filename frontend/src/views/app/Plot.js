@@ -1,79 +1,67 @@
 import React, {useState, useEffect} from 'react';
-// import Axios from 'axios';
+// import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
-import { Table, Card, Row, Col} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Table, Card, Row, Col} from 'react-bootstrap';
+// import {Link} from 'react-router-dom';
 
-function Plot() {
+const Plot = () => {
 
-  const [data, setData] = useState([]);
+  const [plots, setPlot] = useState([]);
   
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const url = "http://localhost:8000/api/plot"
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Token ${localStorage.getItem('token')}`
-      }
-  })
+    const url = "http://127.0.0.1:8000/app/plot/"
+    fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      setData(json)
+      setPlot(json)
       console.log(json, "json");
-      //return json;
+      return json;
     }, [])
     .catch((error) => {
       console.error(error);
     })
   },[]);
 
-  useEffect(() => {
-    if(data.length !==0){
-      setIsLoading(false);
-    }
-    console.log(data);
-  },[data]);
+  // useEffect(() => {
+  //   if(data.length !==0){
+  //     setIsLoading(true);
+  //   }
+  //   console.log(data);
+  // },[data]);
 
     return (
       <div className="content">
-      {/* <Dashboard /> */}
       <br />
       <Row>
         <Col>
         <Card>
       <Card.Header>
-        <h4>View Records</h4>
-        <Link className="btn btn-warning" to="/add">Add Plot</Link>
+        <h4>View Plot Information</h4>
+        {/* <Link className="btn btn-warning" to="/add">Add New Plot</Link> */}
       </Card.Header>
       <Card.Body>
           <Table stripped bordered hover size="sm">
             <thead>
             <tr>
-              
               <th width="170">Plot Number</th>
-              {/* <th width="170">Email Address</th> */}
-              <th width="170">Action</th>
-              
+              <th width="170">Plot Image</th>
+              <th width="170">Date Updated</th>
+              <th width="170">Action</th>           
             </tr>
             </thead>
 
           <tbody>
-          { isLoading ? (<h6>Loading ... </h6>) : (
-          data.map((con, index) => (
+          { 
+          plots.map((con, index) => (
           <tr key={con.index}>
             
             <td>{con.plot_number}</td>
-            {/* <td>{con.email}</td> */}
-            <Link className="btn btn-warning" to={`/${con.id}/`}>Show Detail</Link>
-            
           </tr>
 
           ))
-          )}
+          }
 
           </tbody>
           </Table>
@@ -82,7 +70,6 @@ function Plot() {
 
         </Col>
       </Row>
-            {/* <Footer/> */}
       </div>
 
     )

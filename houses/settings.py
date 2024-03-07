@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     
     #Third party apps
     'knox',
-    'mpesa',
+    # 'mpesa',
     
     # Main app
     'accounts',
@@ -84,14 +84,14 @@ ROOT_URLCONF = 'houses.urls'
 
 REST_FRAMEWORK = {
     # DEFAULT AUTHENTICATION CLASSES
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
         
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     
     'PAGE_SIZE': 10,
     
     # PERMISSION CLASSES
-    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
+    # 'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
     
     'DEFAULT_FILTER_BACKENDS': (        
         'django_filters.rest_framework.DjangoFilterBackend',
@@ -217,4 +217,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Default Custom User Account
 AUTH_USER_MODEL = 'accounts.User'
+# ACCOUNT_USER_DISPLAY = lambda user user.get_full_name()
 ACCOUNT_UNIQUE_EMAIL = True

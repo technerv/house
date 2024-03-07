@@ -10,7 +10,7 @@ class HouseModelAdmin(admin.ModelAdmin):
 
 @admin.register(Tenant)
 class TenantModelAdmin(admin.ModelAdmin):
-    list_display = ('house_number',)
+    list_display = ('house_number', 'tenant_name')
 
 @admin.register(Plot)
 class PlotModelAdmin(admin.ModelAdmin):
